@@ -38,7 +38,7 @@ import static dev.redstudio.recrystallizedwing.ProjectConstants.VERSION;
 //                                          |  $$$$$$/                                                                                                         |  $$$$$$/
 //                                           \______/                                                                                                           \______/
 @Mod.EventBusSubscriber
-@Mod(modid = ID, name = NAME, version = VERSION, updateJSON = "https://raw.githubusercontent.com/Red-Studio-Ragnarok/ReCrystallized-Wing/main/update.json")
+@Mod(modid = ID, name = NAME, version = VERSION, updateJSON = "https://forge.curseupdate.com/839163/" + ID)
 public final class RCW {
 
     private static final Map<String, ResourceLocation> LOOT_TABLE_MAP = new HashMap<>();
