@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Re-Crystallized Wing Version 2.0 Changelog - 2024-08-12
 
+### Fixed
+
+- Fixed Crystal Wings not working after the player's bed was broken
+
 ### Internal
 
 - Updated to [io.freefair.lombok](https://plugins.gradle.org/plugin/io.freefair.lombok) 8.7.1

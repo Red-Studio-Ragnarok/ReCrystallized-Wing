@@ -34,7 +34,9 @@ public final class CrystalWing extends BaseItem {
         if (player.dimension == 0) {
             BlockPos targetLocation = player.getBedLocation(player.dimension);
 
-            if (targetLocation == null) {
+            final IBlockState blockState = world.getBlockState(targetLocation);
+
+            if (!blockState.getBlock().isBed(blockState, world, targetLocation, null)) { // TODO: Feed the player?
                 targetLocation = world.getSpawnPoint();
 
                 final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(targetLocation);
@@ -45,8 +47,7 @@ public final class CrystalWing extends BaseItem {
 
                 targetLocation = mutablePos.toImmutable();
             } else {
-                final IBlockState blockState = world.getBlockState(targetLocation);
-                targetLocation = blockState.getBlock().getBedSpawnPosition(blockState, world, targetLocation, null);
+                targetLocation = blockState.getBlock().getBedSpawnPosition(blockState, world, targetLocation, null); // TODO: Feed the player?
             }
 
             player.sendStatusMessage(new TextComponentTranslation("teleport.chatMessage"), RCWConfig.common.showInActionBar);
