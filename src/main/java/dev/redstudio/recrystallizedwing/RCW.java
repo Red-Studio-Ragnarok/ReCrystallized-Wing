@@ -1,5 +1,6 @@
 package dev.redstudio.recrystallizedwing;
 
+import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
 import dev.redstudio.recrystallizedwing.items.BurningWing;
 import dev.redstudio.recrystallizedwing.items.BurntWing;
 import dev.redstudio.recrystallizedwing.items.CrystalWing;
@@ -11,6 +12,7 @@ import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -63,6 +65,8 @@ public final class RCW {
         LootTableList.register(OVERWORLD_LOOT_TABLE);
         LootTableList.register(NETHER_LOOT_TABLE);
         LootTableList.register(END_LOOT_TABLE);
+
+        MinecraftForge.EVENT_BUS.register(NostalgicSoundsHandler.class);
     }
 
     @SubscribeEvent

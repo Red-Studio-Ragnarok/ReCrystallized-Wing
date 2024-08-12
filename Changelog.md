@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Fixed Crystal Wings not working after the player's bed was broken
+- Fixed Burnt Wings and Ender Scepter not playing any sounds when the nostalgic "Nostalgic Sounds" config was enabled
 
 ### Internal
 

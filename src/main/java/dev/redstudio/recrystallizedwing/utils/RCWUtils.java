@@ -1,6 +1,8 @@
 package dev.redstudio.recrystallizedwing.utils;
 
 import dev.redstudio.recrystallizedwing.config.RCWConfig;
+import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
+import dev.redstudio.recrystallizedwing.sounds.NostalgicSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -120,10 +122,9 @@ public final class RCWUtils {
         while (!world.getCollisionBoxes(player, player.getEntityBoundingBox()).isEmpty())
             player.setPositionAndUpdate(player.posX, player.posY + 1, player.posZ);
 
-        if (!RCWConfig.common.nostalgicSounds)
-            world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 1, 1);
-
         spawnExplosionParticleAtEntity(player, particleAmount);
+
+        playTeleportSound(player);
     }
 
     /**
@@ -165,13 +166,15 @@ public final class RCWUtils {
     }
 
     /**
-     * Plays a short "pling" sound effect in the world with a specific pitch at the player location.
+     * Plays the teleport sound effect for the given player.
      *
-     * @param pitch An integer value representing the pitch of the "pling" sound to be played, measured in semitones relative to the standard A440 tuning
-     * @param world The world in which to play the "pling" sound effect
-     * @param player The player whose position to use for the sound
+     * @param player The player for who to play the sound
      */
-    public static void playPlingAtPitch(final World world, final EntityPlayer player, final float pitch) {
-        world.playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_PLING, SoundCategory.MASTER, 0.5F, pitch);
+    private static void playTeleportSound(final EntityPlayer player) {
+        if (!RCWConfig.common.nostalgicSounds) {
+            player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 1, 1);
+        } else {
+            NostalgicSoundsHandler.NOSTALGIC_SOUNDS.add(new NostalgicSound(player));
+        }
     }
 }
