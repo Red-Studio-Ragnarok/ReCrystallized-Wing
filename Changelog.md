@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Updated to [io.freefair.lombok](https://plugins.gradle.org/plugin/io.freefair.lombok) 8.7.1
 - Updated to [foojay-resolver](https://github.com/gradle/foojay-toolchains) 0.8.0
 - Updated to [org.jetbrains.gradle.plugin.idea-ext](https://plugins.gradle.org/plugin/org.jetbrains.gradle.plugin.idea-ext) 1.1.8
+- Updated to [Gradle](https://gradle.org) 8.10-rc-1
 
 ## Re-Crystallized Wing Version 1.2 Changelog - 2023-09-12
 
