@@ -11,8 +11,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Updated to [io.freefair.lombok](https://plugins.gradle.org/plugin/io.freefair.lombok) 8.7.1
 - Updated to [foojay-resolver](https://github.com/gradle/foojay-toolchains) 0.8.0
 - Updated to [org.jetbrains.gradle.plugin.idea-ext](https://plugins.gradle.org/plugin/org.jetbrains.gradle.plugin.idea-ext) 1.1.8
-- Updated to [Gradle](https://gradle.org) 8.10-rc-1
+- Updated to [Gradle](https://gradle.org) 8.8
 - Updated to [RetroFuturaGradle](https://github.com/GTNewHorizons/RetroFuturaGradle) to version 1.4.1
+- Switched from [RetroFuturaGradle](https://github.com/GTNewHorizons/RetroFuturaGradle) tags to [gradle-buildconfig-plugin](https://github.com/gmazzo/gradle-buildconfig-plugin)
+- Switched to [Gradle](https://gradle.org) Kotlin DSL
+- Switched to the new standard `gradle.properties`
+- Switched to [CurseUpdate](https://forge.curseupdate.com/) for update checking
+- Set a minimum Gradle Daemon JVM version requirement
 
 ## Re-Crystallized Wing Version 1.2 Changelog - 2023-09-12
 

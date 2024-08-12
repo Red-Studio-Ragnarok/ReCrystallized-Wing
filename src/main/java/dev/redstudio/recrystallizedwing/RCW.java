@@ -22,9 +22,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dev.redstudio.recrystallizedwing.utils.ModReference.ID;
-import static dev.redstudio.recrystallizedwing.utils.ModReference.NAME;
-import static dev.redstudio.recrystallizedwing.utils.ModReference.VERSION;
+import static dev.redstudio.recrystallizedwing.ProjectConstants.ID;
+import static dev.redstudio.recrystallizedwing.ProjectConstants.NAME;
+import static dev.redstudio.recrystallizedwing.ProjectConstants.VERSION;
 
 //   /$$$$$$$             /$$$$$$                                  /$$               /$$ /$$ /$$                           /$$       /$$      /$$ /$$
 //  | $$__  $$           /$$__  $$                                | $$              | $$| $$|__/                          | $$      | $$  /$ | $$|__/

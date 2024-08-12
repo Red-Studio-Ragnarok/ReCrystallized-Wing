@@ -1,13 +1,14 @@
+rootProject.name = "Re-Crystallized Wing"
+
 pluginManagement {
     repositories {
         maven {
             // RetroFuturaGradle
             name = "GTNH Maven"
-            url = uri("http://jenkins.usrv.eu:8081/nexus/content/groups/public/")
-            allowInsecureProtocol = true
+            url = uri("https://nexus.gtnewhorizons.com/repository/public/")
             mavenContent {
+                includeGroupByRegex("com\\.gtnewhorizons\\..+")
                 includeGroup("com.gtnewhorizons")
-                includeGroup("com.gtnewhorizons.retrofuturagradle")
             }
         }
         gradlePluginPortal()
@@ -17,6 +18,5 @@ pluginManagement {
 }
 
 plugins {
-    // Automatic toolchain provisioning
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0" // Automatic toolchain provisioning
 }

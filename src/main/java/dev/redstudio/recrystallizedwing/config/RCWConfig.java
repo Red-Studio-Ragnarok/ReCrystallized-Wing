@@ -6,8 +6,8 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static dev.redstudio.recrystallizedwing.utils.ModReference.ID;
-import static dev.redstudio.recrystallizedwing.utils.ModReference.NAME;
+import static dev.redstudio.recrystallizedwing.ProjectConstants.ID;
+import static dev.redstudio.recrystallizedwing.ProjectConstants.NAME;
 
 @Config(modid = ID, name = NAME)
 @Mod.EventBusSubscriber(modid = ID)
