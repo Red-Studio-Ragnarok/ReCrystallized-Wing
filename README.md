@@ -10,7 +10,7 @@
 
 ![Banner](https://www.bisecthosting.com/images/CF/ReCrystallized_Wing/BH_RCW_header.webp)
 
-Harness the power of the Magical Winds and the End to travel easily!
+Harness the power of the magical winds and the End to travel easily!
 
 ![BannerDescription](https://www.bisecthosting.com/images/CF/ReCrystallized_Wing/BH_RCW_banner1.webp)
 
