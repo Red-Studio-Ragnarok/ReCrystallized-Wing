@@ -3,6 +3,7 @@ package dev.redstudio.recrystallizedwing.utils;
 import dev.redstudio.recrystallizedwing.config.RCWConfig;
 import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
 import dev.redstudio.recrystallizedwing.sounds.NostalgicSound;
+import lombok.NoArgsConstructor;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +20,15 @@ import net.minecraft.world.WorldServer;
 
 import java.util.Random;
 
+import static lombok.AccessLevel.PRIVATE;
+
+/**
+ * Utility class containing various utility methods.
+ *
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
+@NoArgsConstructor(access = PRIVATE)
 public final class RCWUtils {
 
     public static final Random random = new Random();
@@ -71,12 +81,13 @@ public final class RCWUtils {
     public static int getHighestSolidBlock(final World world, final BlockPos.MutableBlockPos mutablePos, final boolean skipNonNormalCube) {
         mutablePos.setY(world.getActualHeight());
 
-        if (!skipNonNormalCube)
+        if (!skipNonNormalCube) {
             while ((mutablePos.getY() > 0) && world.isAirBlock(mutablePos))
                 mutablePos.move(EnumFacing.DOWN);
-        else
+        } else {
             while ((mutablePos.getY() > 0) && (world.isAirBlock(mutablePos) && !world.isBlockNormalCube(mutablePos, true)))
                 mutablePos.move(EnumFacing.DOWN);
+        }
 
         return mutablePos.getY();
     }
@@ -168,13 +179,13 @@ public final class RCWUtils {
     /**
      * Plays the teleport sound effect for the given player.
      *
-     * @param player The player for who to play the sound
+     * @param player The player for whom to play the sound
      */
     private static void playTeleportSound(final EntityPlayer player) {
-        if (!RCWConfig.common.nostalgicSounds) {
-            player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 1, 1);
-        } else {
+        if (RCWConfig.common.nostalgicSounds) {
             NostalgicSoundsHandler.NOSTALGIC_SOUNDS.add(new NostalgicSound(player));
+        } else {
+            player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 1, 1);
         }
     }
 }

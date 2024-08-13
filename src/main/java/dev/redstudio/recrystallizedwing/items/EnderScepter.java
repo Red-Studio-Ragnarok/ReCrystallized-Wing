@@ -12,6 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+/**
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
 public final class EnderScepter extends BaseItem {
 
     public EnderScepter() {
@@ -22,29 +26,29 @@ public final class EnderScepter extends BaseItem {
     public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
         final ItemStack itemStack = player.getHeldItem(hand);
 
-        if (!world.isRemote) {
-            final RayTraceResult rayTraceResult = RCWUtils.rayTraceWithExtendedReach(world, player);
+        if (world.isRemote)
+            return new ActionResult<>(EnumActionResult.PASS, itemStack);
 
-            if ((rayTraceResult != null) && rayTraceResult.typeOfHit.equals(RayTraceResult.Type.BLOCK)) {
-                final BlockPos.MutableBlockPos target = new BlockPos.MutableBlockPos(rayTraceResult.getBlockPos());
+        final RayTraceResult rayTraceResult = RCWUtils.rayTraceWithExtendedReach(world, player);
 
-                if (player.capabilities.isFlying)
-                    target.setY(Math.max((int) player.posY, RCWUtils.getHighestSolidBlock(world, target, true)));
+        if (rayTraceResult == null || !rayTraceResult.typeOfHit.equals(RayTraceResult.Type.BLOCK))
+            return new ActionResult<>(EnumActionResult.FAIL, itemStack);
 
-                RCWUtils.teleportPlayer(world, player, target, 40);
+        final BlockPos.MutableBlockPos target = new BlockPos.MutableBlockPos(rayTraceResult.getBlockPos());
 
-                if (RCWConfig.common.durability.enderScepterDurability == 1)
-                    itemStack.damageItem(2, player);
-                else if (RCWConfig.common.durability.enderScepterDurability > 0)
-                    itemStack.damageItem(1, player);
+        if (player.capabilities.isFlying)
+            target.setY(Math.max((int) player.posY, RCWUtils.getHighestSolidBlock(world, target, true)));
 
-                player.getCooldownTracker().setCooldown(this, RCWConfig.common.cooldown.enderScepterCooldown);
+        RCWUtils.teleportPlayer(world, player, target, 40);
 
-                return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
-            }
-        }
+        if (RCWConfig.common.durability.enderScepterDurability == 1)
+            itemStack.damageItem(2, player);
+        else if (RCWConfig.common.durability.enderScepterDurability > 0)
+            itemStack.damageItem(1, player);
 
-        return new ActionResult<>(EnumActionResult.PASS, itemStack);
+        player.getCooldownTracker().setCooldown(this, RCWConfig.common.cooldown.enderScepterCooldown);
+
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
     }
 
     public EnumRarity getForgeRarity(final ItemStack itemStack) {

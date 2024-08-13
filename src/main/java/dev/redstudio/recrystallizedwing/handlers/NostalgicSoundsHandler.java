@@ -1,11 +1,14 @@
 package dev.redstudio.recrystallizedwing.handlers;
 
 import dev.redstudio.recrystallizedwing.sounds.NostalgicSound;
+import lombok.NoArgsConstructor;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Event handler for playing nostalgic sounds.
@@ -14,6 +17,7 @@ import java.util.List;
  * @see NostalgicSound
  * @since 2.0
  */
+@NoArgsConstructor(access = PRIVATE)
 public final class NostalgicSoundsHandler {
 
     public static final List<NostalgicSound> NOSTALGIC_SOUNDS = new ArrayList<>();

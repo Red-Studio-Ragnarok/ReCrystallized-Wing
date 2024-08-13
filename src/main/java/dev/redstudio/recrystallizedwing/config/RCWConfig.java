@@ -1,5 +1,6 @@
 package dev.redstudio.recrystallizedwing.config;
 
+import lombok.NoArgsConstructor;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -8,9 +9,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static dev.redstudio.recrystallizedwing.ProjectConstants.ID;
 import static dev.redstudio.recrystallizedwing.ProjectConstants.NAME;
+import static lombok.AccessLevel.PRIVATE;
 
+/**
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
 @Config(modid = ID, name = NAME)
 @Mod.EventBusSubscriber(modid = ID)
+@NoArgsConstructor(access = PRIVATE)
 public class RCWConfig {
 
     public static final Common common = new Common();
@@ -49,7 +56,9 @@ public class RCWConfig {
 
     @SubscribeEvent
     public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent onConfigChangedEvent) {
-        if (onConfigChangedEvent.getModID().equals(ID))
-            ConfigManager.sync(ID, Config.Type.INSTANCE);
+        if (!onConfigChangedEvent.getModID().equals(ID))
+            return;
+
+        ConfigManager.sync(ID, Config.Type.INSTANCE);
     }
 }

@@ -10,6 +10,10 @@ import net.minecraft.world.World;
 
 import static dev.redstudio.recrystallizedwing.RCW.burntWing;
 
+/**
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
 public final class BurningWing extends BaseItem {
 
     @Override
@@ -27,7 +31,8 @@ public final class BurningWing extends BaseItem {
             RCWUtils.spawnExplosionParticleAtEntity(player, 160);
 
             player.inventory.setInventorySlotContents(itemSlot, new ItemStack(burntWing));
-        } else if (!entity.isBurning())
+        } else if (!entity.isBurning()) {
             entity.setFire(2);
+        }
     }
 }

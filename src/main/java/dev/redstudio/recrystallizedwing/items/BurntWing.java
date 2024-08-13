@@ -11,6 +11,10 @@ import net.minecraft.world.World;
 
 import static dev.redstudio.recrystallizedwing.RCW.crystalWing;
 
+/**
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
 public final class BurntWing extends BaseItem {
 
     public BurntWing() {
@@ -19,21 +23,22 @@ public final class BurntWing extends BaseItem {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
-        ItemStack itemStack = player.getHeldItem(hand);
+        final ItemStack itemStack = player.getHeldItem(hand);
 
         if (world.isRemote)
             return new ActionResult<>(EnumActionResult.PASS, itemStack);
 
-        // If in the nether replace by a normal crystal wing and use it, which if in the nether will replace it by a burning crystal wing
+        // If in the Nether, replace by a normal crystal wing and use it, which if in the nether will replace it by a burning crystal wing
         if (player.dimension == -1)
             return crystalWing.onItemRightClick(world, player, hand);
 
         RCWUtils.randomTeleport(world, player);
 
-        if (RCWConfig.common.durability.BurntWingDurability == 1)
+        if (RCWConfig.common.durability.BurntWingDurability == 1) {
             itemStack.damageItem(2, player);
-        else if (RCWConfig.common.durability.BurntWingDurability > 0)
+        } else if (RCWConfig.common.durability.BurntWingDurability > 0) {
             itemStack.damageItem(1, player);
+        }
 
         player.getCooldownTracker().setCooldown(this, RCWConfig.common.cooldown.burntWingCooldown);
 

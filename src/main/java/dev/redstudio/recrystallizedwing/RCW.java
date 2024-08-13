@@ -81,7 +81,6 @@ public final class RCW {
             return;
 
         final String lootTableName = lootTableResourceLocation.getPath() + "_loot";
-
         final LootEntry lootEntryTable = new LootEntryTable(lootTableResourceLocation, 1, 1, new LootCondition[0], lootTableName);
         final LootPool lootPool = new LootPool(new LootEntry[]{lootEntryTable}, new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), lootTableName);
 

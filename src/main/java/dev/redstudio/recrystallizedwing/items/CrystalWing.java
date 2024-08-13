@@ -13,6 +13,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+/**
+ * @author Luna Lage (Desoroxxx)
+ * @since 1.0
+ */
 public final class CrystalWing extends BaseItem {
 
     public CrystalWing() {
@@ -36,9 +40,8 @@ public final class CrystalWing extends BaseItem {
 
                 final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(targetLocation);
 
-                while (!RCWUtils.verifyTeleportCoordinates(world, mutablePos)) {
+                while (!RCWUtils.verifyTeleportCoordinates(world, mutablePos))
                     mutablePos.move(EnumFacing.SOUTH);
-                }
 
                 targetLocation = mutablePos.toImmutable();
             } else {
@@ -55,10 +58,11 @@ public final class CrystalWing extends BaseItem {
             RCWUtils.randomTeleport(world, player);
         }
 
-        if (RCWConfig.common.durability.crystalWingDurability == 1)
+        if (RCWConfig.common.durability.crystalWingDurability == 1) {
             itemStack.damageItem(2, player);
-        else if (RCWConfig.common.durability.crystalWingDurability > 0)
+        } else if (RCWConfig.common.durability.crystalWingDurability > 0) {
             itemStack.damageItem(1, player);
+        }
 
         player.getCooldownTracker().setCooldown(this, RCWConfig.common.cooldown.crystalWingCooldown);
 
