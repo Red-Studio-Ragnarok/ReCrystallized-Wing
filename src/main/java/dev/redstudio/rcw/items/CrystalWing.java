@@ -33,9 +33,12 @@ public final class CrystalWing extends BaseItem {
         if (player.dimension == 0) {
             BlockPos targetLocation = player.getBedLocation(player.dimension);
 
-            final IBlockState blockState = world.getBlockState(targetLocation);
+            IBlockState blockState = null;
 
-            if (!blockState.getBlock().isBed(blockState, world, targetLocation, player)) {
+            if (targetLocation != null)
+                blockState = world.getBlockState(targetLocation);
+
+            if (targetLocation == null || !blockState.getBlock().isBed(blockState, world, targetLocation, player)) {
                 targetLocation = world.getSpawnPoint();
 
                 final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(targetLocation);
