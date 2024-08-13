@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Re-Crystallized Wing Version 2.0 Changelog - 2024-08-12
 
+### Changed
+
+- Changed loot tables to be closer to the original
+
 ### Fixed
 
 - Fixed Crystal Wings not working after the player's bed was broken

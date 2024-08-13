@@ -1,0 +1,32 @@
+{
+  "pools": [
+    {
+      "name": "crystal_wing_high_loot",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "recrystallizedwing:crystal_wing",
+          "weight": 3,
+          "conditions": [
+            {
+              "condition": "random_chance",
+              "chance": 0.4
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "recrystallizedwing:burnt_wing",
+          "weight": 2,
+          "conditions": [
+            {
+              "condition": "random_chance",
+              "chance": 0.3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import dev.redstudio.recrystallizedwing.items.BurningWing;
 import dev.redstudio.recrystallizedwing.items.BurntWing;
 import dev.redstudio.recrystallizedwing.items.CrystalWing;
 import dev.redstudio.recrystallizedwing.items.EnderScepter;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -45,26 +46,30 @@ public final class RCW {
 
     private static final Map<String, ResourceLocation> LOOT_TABLE_MAP = new HashMap<>();
 
-    private static final ResourceLocation OVERWORLD_LOOT_TABLE = new ResourceLocation(ID, "overworld_loot");
-    private static final ResourceLocation NETHER_LOOT_TABLE = new ResourceLocation(ID, "nether_loot");
-    private static final ResourceLocation END_LOOT_TABLE = new ResourceLocation(ID, "end_loot");
+    private static final ResourceLocation CRYSTAL_WING_LOW_TABLE = new ResourceLocation(ID, "chests/crystal_wing_low_loot");
+    private static final ResourceLocation CRYSTAL_WING_HIGH_TABLE = new ResourceLocation(ID, "chests/crystal_wing_high_loot");
+    private static final ResourceLocation ENDER_SCEPTER_TABLE = new ResourceLocation(ID, "chests/ender_scepter_loot");
 
     public static Item crystalWing, burningWing, burntWing, enderScepter;
 
     static {
-        LOOT_TABLE_MAP.put("minecraft:chests/desert_pyramid", OVERWORLD_LOOT_TABLE);
-        LOOT_TABLE_MAP.put("minecraft:chests/spawn_bonus_chest", OVERWORLD_LOOT_TABLE);
-        LOOT_TABLE_MAP.put("minecraft:chests/simple_dungeon", OVERWORLD_LOOT_TABLE);
-        LOOT_TABLE_MAP.put("minecraft:chests/stronghold_library", OVERWORLD_LOOT_TABLE);
-        LOOT_TABLE_MAP.put("minecraft:chests/nether_bridge", NETHER_LOOT_TABLE);
-        LOOT_TABLE_MAP.put("minecraft:chests/end_city_treasure", END_LOOT_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/jungle_temple", CRYSTAL_WING_LOW_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/stronghold_library", CRYSTAL_WING_LOW_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/village_blacksmith", CRYSTAL_WING_LOW_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/spawn_bonus_chest", CRYSTAL_WING_LOW_TABLE);
+
+        LOOT_TABLE_MAP.put("minecraft:chests/desert_pyramid", CRYSTAL_WING_HIGH_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/simple_dungeon", CRYSTAL_WING_HIGH_TABLE);
+        LOOT_TABLE_MAP.put("minecraft:chests/nether_bridge", CRYSTAL_WING_HIGH_TABLE);
+
+        LOOT_TABLE_MAP.put("minecraft:chests/end_city_treasure", ENDER_SCEPTER_TABLE);
     }
 
     @Mod.EventHandler
     public static void init(final FMLInitializationEvent initializationEvent) {
-        LootTableList.register(OVERWORLD_LOOT_TABLE);
-        LootTableList.register(NETHER_LOOT_TABLE);
-        LootTableList.register(END_LOOT_TABLE);
+        LootTableList.register(CRYSTAL_WING_LOW_TABLE);
+        LootTableList.register(CRYSTAL_WING_HIGH_TABLE);
+        LootTableList.register(ENDER_SCEPTER_TABLE);
 
         MinecraftForge.EVENT_BUS.register(NostalgicSoundsHandler.class);
     }
@@ -79,7 +84,7 @@ public final class RCW {
         final String lootTableName = lootTableResourceLocation.getPath() + "_loot";
 
         final LootEntry lootEntryTable = new LootEntryTable(lootTableResourceLocation, 1, 1, new LootCondition[0], lootTableName);
-        final LootPool lootPool = new LootPool(new LootEntry[]{lootEntryTable}, new LootCondition[0], new RandomValueRange(1, 2), new RandomValueRange(1, 2), lootTableName);
+        final LootPool lootPool = new LootPool(new LootEntry[]{lootEntryTable}, new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), lootTableName);
 
         lootTableLoadEvent.getTable().addPool(lootPool);
     }

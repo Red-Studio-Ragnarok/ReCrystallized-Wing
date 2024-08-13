@@ -1,0 +1,15 @@
+{
+  "pools": [
+    {
+      "name": "ender_scepter_loot",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "recrystallizedwing:ender_scepter",
+          "weight": 3
+        }
+      ]
+    }
+  ]
+}
