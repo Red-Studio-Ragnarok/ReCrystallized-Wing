@@ -2,6 +2,7 @@ import org.jetbrains.gradle.ext.settings
 import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
 import org.jetbrains.gradle.ext.Gradle
 import org.jetbrains.gradle.ext.runConfigurations
+import org.gradle.api.tasks.bundling.Zip
 
 plugins {
     id("com.gtnewhorizons.retrofuturagradle") version "1.4.1"
@@ -90,6 +91,30 @@ tasks.processResources.configure {
             expand(mapOf("version" to project.version, "name" to project.name, "id" to id))
         }
     }
+}
+
+tasks.register<Zip>("packageResourcePacks") {
+    group = "build"
+    description = "Packs resourcepacks into zip files and places them in the build/libs directory."
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+
+    // Include the *processed resources* in the ZIP
+    val resourcePacksDir =layout.buildDirectory.dir("resources/main/resourcepacks").get().asFile
+    resourcePacksDir.listFiles()?.filter { it.isDirectory }?.forEach { dir ->
+        from(dir)
+
+        // Transform the folder name, replace underscores and capitalize words
+        val resourcePackName = dir.name
+            .replace("_", " ")
+            .split(" ")
+            .joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() } }
+
+        archiveFileName.set("${project.name} $resourcePackName ${project.version}.zip")
+    }
+}
+
+tasks.named("processResources") {
+    finalizedBy("packageResourcePacks")
 }
 
 tasks.withType<Jar>().configureEach {
