@@ -61,6 +61,10 @@ tasks {
         finalizedBy("packageResourcePacks")
     }
 
+    // TODO: Maybe this could be it's own task that also expands like above?
+    //  this might fix the issue where it doesn't run on a clean build,
+    //  and it might also allow us to exclude the resource packs from the jar
+
     register<Zip>("packageResourcePacks") {
         group = "build"
         description = "Packs resource packs into zip files and places them in the `build/libs` directory."
