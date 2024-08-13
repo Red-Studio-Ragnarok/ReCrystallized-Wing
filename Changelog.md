@@ -33,6 +33,7 @@ and this project follows the [Ragnarök Versioning Convention](https://github.co
 - Set a minimum Gradle Daemon JVM version requirement
 - General cleanup
 - Automated building the resource packs
+- Remade the build script
 
 ### Nostalgic Models Resource Pack
 
