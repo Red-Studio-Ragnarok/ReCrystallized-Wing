@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "recrystallizedwing:crystal_wing",
+    "item": "${id}:crystal_wing",
     "count": 1
   }
 }

@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-        "item": "recrystallizedwing:ender_scepter"
+        "item": "${id}:ender_scepter"
     },
     "title": {
       "translate": "advancements.enderScepter.title"
@@ -11,14 +11,14 @@
     },
     "hidden": true
   },
-  "parent": "recrystallizedwing:root",
+  "parent": "${id}:root",
   "criteria": {
     "stone_pickaxe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "recrystallizedwing:ender_scepter"
+            "item": "${id}:ender_scepter"
           }
         ]
       }

@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "recrystallizedwing:crystal_wing"
+      "item": "${id}:crystal_wing"
     },
     "title": {
       "translate": "advancements.crystalWing.title"
@@ -18,7 +18,7 @@
       "conditions": {
         "items": [
           {
-            "item": "recrystallizedwing:crystal_wing"
+            "item": "${id}:crystal_wing"
           }
         ]
       }

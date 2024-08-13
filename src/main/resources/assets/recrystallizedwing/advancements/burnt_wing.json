@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "recrystallizedwing:burnt_wing"
+      "item": "${id}:burnt_wing"
     },
     "title": {
       "translate": "advancements.burntWing.title"
@@ -11,14 +11,14 @@
     },
     "hidden": true
   },
-  "parent": "recrystallizedwing:root",
+  "parent": "${id}:root",
   "criteria": {
     "stone_pickaxe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "recrystallizedwing:burnt_wing"
+            "item": "${id}:burnt_wing"
           }
         ]
       }

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "recrystallizedwing:crystal_wing",
+          "name": "${id}:crystal_wing",
           "weight": 3,
           "conditions": [
             {
@@ -17,7 +17,7 @@
         },
         {
           "type": "item",
-          "name": "recrystallizedwing:burnt_wing",
+          "name": "${id}:burnt_wing",
           "weight": 2,
           "conditions": [
             {

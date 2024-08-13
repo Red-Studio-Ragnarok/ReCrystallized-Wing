@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "recrystallizedwing:items/ender_scepter"
+		"layer0": "${id}:items/ender_scepter"
 	},
 	"display": {
 		"thirdperson_righthand": {

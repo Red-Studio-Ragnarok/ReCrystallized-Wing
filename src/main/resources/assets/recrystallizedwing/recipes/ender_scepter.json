@@ -17,7 +17,7 @@
     }
   },
   "result": {
-    "item": "recrystallizedwing:ender_scepter",
+    "item": "${id}:ender_scepter",
     "count": 1
   }
 }

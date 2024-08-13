@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "recrystallizedwing:items/burning_wing"
+		"layer0": "${id}:items/burning_wing"
 	},
 	"display": {
 		"thirdperson_righthand": {

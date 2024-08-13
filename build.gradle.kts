@@ -82,10 +82,13 @@ java {
 
 tasks.processResources.configure {
     inputs.property("version", project.version)
+    inputs.property("name", project.name)
     inputs.property("id", id)
 
-    filesMatching("mcmod.info") {
-        expand(mapOf("version" to project.version, "id" to id))
+    filesMatching("**/*.*") {
+        if (!file.absolutePath.contains("png")) {
+            expand(mapOf("version" to project.version, "name" to project.name, "id" to id))
+        }
     }
 }
 

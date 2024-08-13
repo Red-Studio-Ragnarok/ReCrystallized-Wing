@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "recrystallizedwing:ender_scepter",
+          "name": "${id}:ender_scepter",
           "weight": 3
         }
       ]
