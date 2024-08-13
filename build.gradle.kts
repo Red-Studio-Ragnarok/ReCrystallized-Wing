@@ -13,7 +13,7 @@ plugins {
 group = "dev.redstudio"
 version = "2.0" // Versioning must follow Ragnarök versioning convention: https://github.com/Red-Studio-Ragnarok/Commons/blob/main/Ragnar%C3%B6k%20Versioning%20Convention.md
 
-val id = "recrystallizedwing"
+val id = "rcw"
 
 minecraft {
     mcVersion = "1.12.2"

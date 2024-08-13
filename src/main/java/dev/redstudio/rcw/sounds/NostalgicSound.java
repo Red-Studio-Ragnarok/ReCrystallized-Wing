@@ -1,6 +1,6 @@
-package dev.redstudio.recrystallizedwing.sounds;
+package dev.redstudio.rcw.sounds;
 
-import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
+import dev.redstudio.rcw.handlers.NostalgicSoundsHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;

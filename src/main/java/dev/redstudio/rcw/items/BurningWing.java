@@ -1,6 +1,6 @@
-package dev.redstudio.recrystallizedwing.items;
+package dev.redstudio.rcw.items;
 
-import dev.redstudio.recrystallizedwing.utils.RCWUtils;
+import dev.redstudio.rcw.utils.RCWUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import static dev.redstudio.recrystallizedwing.RCW.burntWing;
+import static dev.redstudio.rcw.RCW.burntWing;
 
 /**
  * @author Luna Lage (Desoroxxx)

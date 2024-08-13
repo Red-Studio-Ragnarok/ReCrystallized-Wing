@@ -1,4 +1,4 @@
-package dev.redstudio.recrystallizedwing.config;
+package dev.redstudio.rcw.config;
 
 import lombok.NoArgsConstructor;
 import net.minecraftforge.common.config.Config;
@@ -7,8 +7,8 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static dev.redstudio.recrystallizedwing.ProjectConstants.ID;
-import static dev.redstudio.recrystallizedwing.ProjectConstants.NAME;
+import static dev.redstudio.rcw.ProjectConstants.ID;
+import static dev.redstudio.rcw.ProjectConstants.NAME;
 import static lombok.AccessLevel.PRIVATE;
 
 /**

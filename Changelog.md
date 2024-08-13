@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Changed loot tables to be closer to the original
 - Changed logo in the mod menu
 - Changed description in the mod menu
+- Changed the mod ID (Items will be automatically converted, achievements will be lost)
 
 ### Fixed
 

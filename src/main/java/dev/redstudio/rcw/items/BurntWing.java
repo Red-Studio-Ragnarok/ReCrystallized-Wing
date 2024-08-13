@@ -1,7 +1,7 @@
-package dev.redstudio.recrystallizedwing.items;
+package dev.redstudio.rcw.items;
 
-import dev.redstudio.recrystallizedwing.config.RCWConfig;
-import dev.redstudio.recrystallizedwing.utils.RCWUtils;
+import dev.redstudio.rcw.config.RCWConfig;
+import dev.redstudio.rcw.utils.RCWUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -9,7 +9,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import static dev.redstudio.recrystallizedwing.RCW.crystalWing;
+import static dev.redstudio.rcw.RCW.crystalWing;
 
 /**
  * @author Luna Lage (Desoroxxx)

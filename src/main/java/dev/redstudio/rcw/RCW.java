@@ -1,10 +1,11 @@
-package dev.redstudio.recrystallizedwing;
+package dev.redstudio.rcw;
 
-import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
-import dev.redstudio.recrystallizedwing.items.BurningWing;
-import dev.redstudio.recrystallizedwing.items.BurntWing;
-import dev.redstudio.recrystallizedwing.items.CrystalWing;
-import dev.redstudio.recrystallizedwing.items.EnderScepter;
+import dev.redstudio.rcw.handlers.MappingsHandler;
+import dev.redstudio.rcw.handlers.NostalgicSoundsHandler;
+import dev.redstudio.rcw.items.BurningWing;
+import dev.redstudio.rcw.items.BurntWing;
+import dev.redstudio.rcw.items.CrystalWing;
+import dev.redstudio.rcw.items.EnderScepter;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -24,9 +25,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dev.redstudio.recrystallizedwing.ProjectConstants.ID;
-import static dev.redstudio.recrystallizedwing.ProjectConstants.NAME;
-import static dev.redstudio.recrystallizedwing.ProjectConstants.VERSION;
+import static dev.redstudio.rcw.ProjectConstants.ID;
+import static dev.redstudio.rcw.ProjectConstants.NAME;
+import static dev.redstudio.rcw.ProjectConstants.VERSION;
 
 //   /$$$$$$$             /$$$$$$                                  /$$               /$$ /$$ /$$                           /$$       /$$      /$$ /$$
 //  | $$__  $$           /$$__  $$                                | $$              | $$| $$|__/                          | $$      | $$  /$ | $$|__/
@@ -70,6 +71,7 @@ public final class RCW {
         LootTableList.register(CRYSTAL_WING_HIGH_TABLE);
         LootTableList.register(ENDER_SCEPTER_TABLE);
 
+        MinecraftForge.EVENT_BUS.register(MappingsHandler.class);
         MinecraftForge.EVENT_BUS.register(NostalgicSoundsHandler.class);
     }
 

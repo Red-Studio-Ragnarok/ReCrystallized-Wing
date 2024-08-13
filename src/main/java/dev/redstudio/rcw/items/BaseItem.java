@@ -1,4 +1,4 @@
-package dev.redstudio.recrystallizedwing.items;
+package dev.redstudio.rcw.items;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

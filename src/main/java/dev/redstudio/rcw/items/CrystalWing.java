@@ -1,8 +1,8 @@
-package dev.redstudio.recrystallizedwing.items;
+package dev.redstudio.rcw.items;
 
-import dev.redstudio.recrystallizedwing.RCW;
-import dev.redstudio.recrystallizedwing.config.RCWConfig;
-import dev.redstudio.recrystallizedwing.utils.RCWUtils;
+import dev.redstudio.rcw.RCW;
+import dev.redstudio.rcw.config.RCWConfig;
+import dev.redstudio.rcw.utils.RCWUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

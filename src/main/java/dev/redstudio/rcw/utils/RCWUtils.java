@@ -1,8 +1,8 @@
-package dev.redstudio.recrystallizedwing.utils;
+package dev.redstudio.rcw.utils;
 
-import dev.redstudio.recrystallizedwing.config.RCWConfig;
-import dev.redstudio.recrystallizedwing.handlers.NostalgicSoundsHandler;
-import dev.redstudio.recrystallizedwing.sounds.NostalgicSound;
+import dev.redstudio.rcw.config.RCWConfig;
+import dev.redstudio.rcw.handlers.NostalgicSoundsHandler;
+import dev.redstudio.rcw.sounds.NostalgicSound;
 import lombok.NoArgsConstructor;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

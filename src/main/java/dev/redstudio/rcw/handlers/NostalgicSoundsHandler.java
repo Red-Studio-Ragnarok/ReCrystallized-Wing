@@ -1,6 +1,6 @@
-package dev.redstudio.recrystallizedwing.handlers;
+package dev.redstudio.rcw.handlers;
 
-import dev.redstudio.recrystallizedwing.sounds.NostalgicSound;
+import dev.redstudio.rcw.sounds.NostalgicSound;
 import lombok.NoArgsConstructor;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
