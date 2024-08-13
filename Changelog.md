@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Switched to the new standard `gradle.properties`
 - Switched to [CurseUpdate](https://forge.curseupdate.com/) for update checking
 - Set a minimum Gradle Daemon JVM version requirement
+- General cleanup
 
 ## Re-Crystallized Wing Version 1.2 Changelog - 2023-09-12
 

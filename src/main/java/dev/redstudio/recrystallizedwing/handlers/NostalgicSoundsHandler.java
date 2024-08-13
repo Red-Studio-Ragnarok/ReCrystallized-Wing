@@ -14,7 +14,7 @@ import java.util.List;
  * @see NostalgicSound
  * @since 2.0
  */
-public final  class NostalgicSoundsHandler {
+public final class NostalgicSoundsHandler {
 
     public static final List<NostalgicSound> NOSTALGIC_SOUNDS = new ArrayList<>();
 

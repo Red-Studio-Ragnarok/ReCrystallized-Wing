@@ -30,6 +30,7 @@ public final class NostalgicSound {
      * Plays the nostalgic sound and returns whether it has finished playing.
      *
      * @return {@code true} if this has finished playing, {@code false} otherwise
+     *
      * @see NostalgicSoundsHandler
      */
     public boolean play() {
