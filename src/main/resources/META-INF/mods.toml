@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[41,43)"
+license = "MIT"
+issueTrackerURL = "https://github.com/Desoroxxx/Re-Crystallized-Wing"
+[[mods]]
+modId = "${id}"
+version = "${version}"
+displayName = "${name}"
+updateJSONURL = "https://forge.curseupdate.com/839163/${id}"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/rcw"
+logoFile = "logo.png"
+credits = "Desoroxxx, sir_squidly, bspkrs, DaftPVF"
+authors = "Red Studio"
+description = '''
+Harness the power of the magical winds and the End to travel easily!
+
+§lWant to have your own mod or support me?§r
+
+If you're looking for a mod but don't have the development skills or time, consider commissioning me!
+My commissions are currently open and I would be happy to create a custom mod to fit your needs as long as you provide assets.
+https://www.buymeacoffee.com/desoroxxx/commissions
+
+You can also support me on a monthly basis by becoming a member.
+To thank you will have the possibility to access exclusive post and messages, Discord channel for WIP content, and even access to unreleased Prototypes or WIP Projects.
+https://www.buymeacoffee.com/desoroxxx/membership
+
+You can also buy me a hot chocolate
+https://www.buymeacoffee.com/desoroxxx.
+'''
+versionRange = "[1.19,1.19.2)"
+ordering = "NONE"
+side = "BOTH"

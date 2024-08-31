@@ -1,10 +1,10 @@
 package dev.redstudio.rcw.sounds;
 
 import dev.redstudio.rcw.handlers.NostalgicSoundsHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 /**
  * Object representing a nostalgic sound from the original mod by DaftPVF for Minecraft 1.2.5.
@@ -16,14 +16,14 @@ public final class NostalgicSound {
 
     private final int notesStartTick;
 
-    private final World world;
-    private final EntityPlayer player;
+    private final Level level;
+    private final Player player;
 
-    public NostalgicSound(final EntityPlayer player) {
+    public NostalgicSound(final Player player) {
         this.player = player;
 
-        world = player.world;
-        notesStartTick = player.ticksExisted;
+        level = player.getLevel();
+        notesStartTick = player.tickCount;
     }
 
     /**
@@ -34,7 +34,7 @@ public final class NostalgicSound {
      * @see NostalgicSoundsHandler
      */
     public boolean play() {
-        final int ticksSinceStart = player.ticksExisted - notesStartTick;
+        final int ticksSinceStart = player.tickCount - notesStartTick;
 
         switch (ticksSinceStart) {
             case 1:
@@ -57,6 +57,6 @@ public final class NostalgicSound {
      * @param pitch An integer value representing the pitch of the "pling" sound to be played, measured in semitones relative to the standard A440 tuning
      */
     private void playPlingAtPitch(final float pitch) {
-        world.playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_PLING, SoundCategory.MASTER, 0.5F, pitch);
+        level.playSound(null, player.blockPosition(), SoundEvents.NOTE_BLOCK_PLING, SoundSource.MASTER, 0.5F, pitch);
     }
 }
