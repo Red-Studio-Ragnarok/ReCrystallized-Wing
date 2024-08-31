@@ -1,7 +1,8 @@
 {
+  "parent": "${id}:root",
   "display": {
     "icon": {
-        "item": "${id}:ender_scepter"
+      "item": "${id}:ender_scepter"
     },
     "title": {
       "translate": "advancements.enderScepter.title"
@@ -9,19 +10,26 @@
     "description": {
       "translate": "advancements.enderScepter.description"
     },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
     "hidden": true
   },
-  "parent": "${id}:root",
   "criteria": {
-    "stone_pickaxe": {
+    "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "${id}:ender_scepter"
+            "items": [
+              "${id}:ender_scepter"
+            ]
           }
         ]
       }
     }
+  },
+  "rewards": {
+    "experience": 128
   }
 }

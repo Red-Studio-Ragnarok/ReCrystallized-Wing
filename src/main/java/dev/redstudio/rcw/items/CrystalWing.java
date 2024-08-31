@@ -1,17 +1,28 @@
 package dev.redstudio.rcw.items;
 
-import dev.redstudio.rcw.RCW;
 import dev.redstudio.rcw.config.RCWConfig;
 import dev.redstudio.rcw.utils.RCWUtils;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+
+import static dev.redstudio.rcw.ProjectConstants.ID;
+import static dev.redstudio.rcw.RCW.BURNING_WING;
+import static net.minecraft.world.level.Level.NETHER;
+import static net.minecraft.world.level.Level.OVERWORLD;
+
 
 /**
  * @author Luna Lage (Desoroxxx)
@@ -19,60 +30,59 @@ import net.minecraft.world.World;
  */
 public final class CrystalWing extends BaseItem {
 
-    public CrystalWing() {
-        super(RCWConfig.common.durability.crystalWingDurability);
+    public CrystalWing(final Properties properties) {
+        super(properties.rarity(Rarity.UNCOMMON), RCWConfig.Common.CRYSTAL_WING_DURABILITY.get());
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
-        ItemStack itemStack = player.getHeldItem(hand);
+    public InteractionResultHolder<ItemStack> use(final Level level, final Player player, final InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
 
-        if (world.isRemote)
-            return new ActionResult<>(EnumActionResult.PASS, itemStack);
+        if (level.isClientSide())
+            return InteractionResultHolder.pass(itemStack);
 
-        if (player.dimension == 0) {
-            BlockPos targetLocation = player.getBedLocation(player.dimension);
+        if (player.getLevel().dimension() == OVERWORLD) {
+            ServerPlayer serverPlayer = (ServerPlayer) player;
 
-            IBlockState blockState = null;
+            BlockPos targetLocation = serverPlayer.getRespawnPosition();
+            Vec3 respawnPosition = null;
 
-            if (targetLocation != null)
-                blockState = world.getBlockState(targetLocation);
+            if (targetLocation != null) {
+                respawnPosition = Player.findRespawnPositionAndUseSpawnBlock((ServerLevel) level, targetLocation, serverPlayer.getRespawnAngle(), false, false).orElse(null);
 
-            if (targetLocation == null || !blockState.getBlock().isBed(blockState, world, targetLocation, player)) {
-                targetLocation = world.getSpawnPoint();
-
-                final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(targetLocation);
-
-                while (!RCWUtils.verifyTeleportCoordinates(world, mutablePos))
-                    mutablePos.move(EnumFacing.SOUTH);
-
-                targetLocation = mutablePos.toImmutable();
-            } else {
-                targetLocation = blockState.getBlock().getBedSpawnPosition(blockState, world, targetLocation, player);
+                if (respawnPosition != null)
+                    targetLocation = new BlockPos(respawnPosition);
             }
 
-            player.sendStatusMessage(new TextComponentTranslation("teleport.chatMessage"), RCWConfig.common.showInActionBar);
+            if (targetLocation == null || respawnPosition == null) {
+                targetLocation = level.getSharedSpawnPos();
 
-            RCWUtils.teleportPlayer(world, player, targetLocation, 40);
-        } else if (player.dimension == -1) {
-            world.playSound(null, player.getPosition(), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            itemStack = new ItemStack(RCW.burningWing, 1);
+                final BlockPos.MutableBlockPos mutablePos = targetLocation.mutable();
+
+                while (!RCWUtils.verifyTeleportCoordinates(level, mutablePos))
+                    mutablePos.move(Direction.SOUTH);
+
+                targetLocation = mutablePos.immutable();
+            }
+
+            player.displayClientMessage(Component.translatable(ID + ".teleport.chatMessage"), RCWConfig.Client.SHOW_IN_ACTION_BAR.get());
+
+            RCWUtils.teleportPlayer(level, player, targetLocation, 40);
+        } else if (player.getLevel().dimension() == NETHER) {
+            level.playSound(null, player.blockPosition(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+            itemStack = new ItemStack(BURNING_WING.get(), 1);
         } else {
-            RCWUtils.randomTeleport(world, player);
+            RCWUtils.randomTeleport(level, player);
         }
 
-        if (RCWConfig.common.durability.crystalWingDurability == 1) {
-            itemStack.damageItem(2, player);
-        } else if (RCWConfig.common.durability.crystalWingDurability > 0) {
-            itemStack.damageItem(1, player);
+        if (RCWConfig.Common.CRYSTAL_WING_DURABILITY.get() == 1) {
+            itemStack.hurtAndBreak(2, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
+        } else if (RCWConfig.Common.CRYSTAL_WING_DURABILITY.get() > 0) {
+            itemStack.hurtAndBreak(1, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
         }
 
-        player.getCooldownTracker().setCooldown(this, RCWConfig.common.cooldown.crystalWingCooldown);
+        player.getCooldowns().addCooldown(this, RCWConfig.Server.CRYSTAL_WING_COOLDOWN.get());
 
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
-    }
-
-    public EnumRarity getForgeRarity(final ItemStack itemStack) {
-        return EnumRarity.UNCOMMON;
+        return InteractionResultHolder.success(itemStack);
     }
 }

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "builtin/generated",
+	"parent": "item/generated",
 	"textures": {
-		"layer0": "${id}:items/crystal_wing"
+		"layer0": "${id}:item/crystal_wing"
 	},
 	"display": {
 		"thirdperson_righthand": {

@@ -1,33 +1,34 @@
 package dev.redstudio.rcw;
 
-import dev.redstudio.rcw.handlers.MappingsHandler;
+import dev.redstudio.rcw.config.RCWConfig;
 import dev.redstudio.rcw.handlers.NostalgicSoundsHandler;
 import dev.redstudio.rcw.items.BurningWing;
 import dev.redstudio.rcw.items.BurntWing;
 import dev.redstudio.rcw.items.CrystalWing;
 import dev.redstudio.rcw.items.EnderScepter;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.*;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.config.ConfigTracker;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static dev.redstudio.rcw.ProjectConstants.ID;
-import static dev.redstudio.rcw.ProjectConstants.NAME;
-import static dev.redstudio.rcw.ProjectConstants.VERSION;
 
 //   /$$$$$$$             /$$$$$$                                  /$$               /$$ /$$ /$$                           /$$       /$$      /$$ /$$
 //  | $$__  $$           /$$__  $$                                | $$              | $$| $$|__/                          | $$      | $$  /$ | $$|__/
@@ -41,7 +42,7 @@ import static dev.redstudio.rcw.ProjectConstants.VERSION;
 //                                          |  $$$$$$/                                                                                                         |  $$$$$$/
 //                                           \______/                                                                                                           \______/
 @Mod.EventBusSubscriber
-@Mod(modid = ID, name = NAME, version = VERSION, updateJSON = "https://forge.curseupdate.com/839163/" + ID)
+@Mod(ID)
 public final class RCW {
 
     private static final Map<String, ResourceLocation> LOOT_TABLE_MAP = new HashMap<>();
@@ -50,7 +51,12 @@ public final class RCW {
     private static final ResourceLocation CRYSTAL_WING_HIGH_TABLE = new ResourceLocation(ID, "chests/crystal_wing_high_loot");
     private static final ResourceLocation ENDER_SCEPTER_TABLE = new ResourceLocation(ID, "chests/ender_scepter_loot");
 
-    public static Item crystalWing, burningWing, burntWing, enderScepter;
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
+
+    public static final RegistryObject<Item> CRYSTAL_WING_ITEM = ITEMS.register("crystal_wing", () -> new CrystalWing(new CrystalWing.Properties()));
+    public static final RegistryObject<Item> BURNING_WING = ITEMS.register("burning_wing", () -> new BurningWing(new BurningWing.Properties()));
+    public static final RegistryObject<Item> BURNT_WING = ITEMS.register("burnt_wing", () -> new BurntWing(new BurntWing.Properties()));
+    public static final RegistryObject<Item> ENDER_SCEPTER = ITEMS.register("ender_scepter", () -> new EnderScepter(new EnderScepter.Properties()));
 
     static {
         LOOT_TABLE_MAP.put("minecraft:chests/jungle_temple", CRYSTAL_WING_LOW_TABLE);
@@ -65,13 +71,15 @@ public final class RCW {
         LOOT_TABLE_MAP.put("minecraft:chests/end_city_treasure", ENDER_SCEPTER_TABLE);
     }
 
-    @Mod.EventHandler
-    public static void init(final FMLInitializationEvent initializationEvent) {
-        LootTableList.register(CRYSTAL_WING_LOW_TABLE);
-        LootTableList.register(CRYSTAL_WING_HIGH_TABLE);
-        LootTableList.register(ENDER_SCEPTER_TABLE);
+    public RCW() {
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        MinecraftForge.EVENT_BUS.register(MappingsHandler.class);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, RCWConfig.Client.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RCWConfig.Common.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, RCWConfig.Server.SPEC);
+
+        ConfigTracker.INSTANCE.loadConfigs(ModConfig.Type.COMMON, FMLPaths.CONFIGDIR.get());
+
         MinecraftForge.EVENT_BUS.register(NostalgicSoundsHandler.class);
     }
 
@@ -82,29 +90,14 @@ public final class RCW {
         if (lootTableResourceLocation == null)
             return;
 
-        final String lootTableName = lootTableResourceLocation.getPath() + "_loot";
-        final LootEntry lootEntryTable = new LootEntryTable(lootTableResourceLocation, 1, 1, new LootCondition[0], lootTableName);
-        final LootPool lootPool = new LootPool(new LootEntry[]{lootEntryTable}, new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), lootTableName);
+        final LootPoolEntryContainer.Builder<?> entryBuilder = LootTableReference.lootTableReference(lootTableResourceLocation).setQuality(1);
 
-        lootTableLoadEvent.getTable().addPool(lootPool);
-    }
+        final LootPool.Builder poolBuilder = new LootPool.Builder()
+                .name(lootTableResourceLocation.getPath() + "_loot")
+                .setRolls(UniformGenerator.between(1, 1))
+                .setBonusRolls(UniformGenerator.between(1, 1))
+                .add(entryBuilder);
 
-    @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> itemRegistryEvent) {
-        crystalWing = new CrystalWing().setTranslationKey("crystal_wing").setRegistryName(ID, "crystal_wing");
-        burningWing = new BurningWing().setTranslationKey("burning_wing").setRegistryName(ID, "burning_wing");
-        burntWing = new BurntWing().setTranslationKey("burnt_wing").setRegistryName(ID, "burnt_wing");
-        enderScepter = new EnderScepter().setTranslationKey("ender_scepter").setRegistryName(ID, "ender_scepter");
-
-        itemRegistryEvent.getRegistry().registerAll(crystalWing, burningWing, burntWing, enderScepter);
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void registerRenders(final ModelRegistryEvent modelRegistryEvent) {
-        ModelLoader.setCustomModelResourceLocation(crystalWing, 0, new ModelResourceLocation(crystalWing.delegate.name(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(burningWing, 0, new ModelResourceLocation(burningWing.delegate.name(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(burntWing, 0, new ModelResourceLocation(burntWing.delegate.name(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(enderScepter, 0, new ModelResourceLocation(enderScepter.delegate.name(), "inventory"));
+        lootTableLoadEvent.getTable().addPool(poolBuilder.build());
     }
 }

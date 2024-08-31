@@ -1,0 +1,17 @@
+{
+  "${id}.teleport.chatMessage": "Magical winds brought you home",
+
+  "item.${id}.crystal_wing": "Crystal Wing",
+  "item.${id}.burning_wing": "Burning Wing",
+  "item.${id}.burnt_wing": "Burnt Wing",
+  "item.${id}.ender_scepter": "Ender Scepter",
+
+  "advancements.crystalWing.title": "The Power Of Magical Winds",
+  "advancements.crystalWing.description": "Get a Crystal Wing.",
+
+  "advancements.burntWing.title": "To Hell And Back",
+  "advancements.burntWing.description": "Get a Burnt Wing by entering water with a Burning Wing.",
+
+  "advancements.enderScepter.title": "Harnessing The End",
+  "advancements.enderScepter.description": "Harness the power of an ender eye with an ender scepter."
+}
