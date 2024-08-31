@@ -6,7 +6,7 @@
 
 [![Java 8](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/built-with/java8_vector.svg)](https://adoptium.net/temurin/releases/?version=8)
 [![Gradle](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/built-with/gradle_vector.svg)](https://gradle.org/)
-[![Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
+[![Forge 1.12.2](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
 
 ![Banner](https://www.bisecthosting.com/images/CF/ReCrystallized_Wing/BH_RCW_header.webp)
 
@@ -14,7 +14,7 @@ Harness the power of the magical winds and the End to travel easily!
 
 ![BannerDescription](https://www.bisecthosting.com/images/CF/ReCrystallized_Wing/BH_RCW_banner1.webp)
 
-Re-Crystallized Wing is a 1.12.2 port of Crystal Wing by bspkrs from 1.8.9, which itself was a port of Crystal Wing by DaftPVF from 1.2.5.
+Re-Crystallized Wing is a 1.12.2 and 1.19.2 port of Crystal Wing by bspkrs from 1.8.9, which itself was a port of Crystal Wing by DaftPVF from 1.2.5.
 
 With helpful items you will be able to travel more easily and even save yourself from risky situations.
 
@@ -30,7 +30,8 @@ If you are in for a nostalgic experience,
 there is also the nostalgic models resource pack that brings back the models from 1.2.5.
 
 Nostalgia is not your thing?
-We also have Jappa style textures in the resource pack [Modernity](https://www.curseforge.com/minecraft/texture-packs/modernity).
+We also have Jappa style textures made by sir_squidly in the resource pack [Modernity](https://www.curseforge.com/minecraft/texture-packs/modernity).
+These are the defaults for Minecraft versions with Jappa style textures, in those versions a Programmer Art resource pack is also available.
 
 ---
 
