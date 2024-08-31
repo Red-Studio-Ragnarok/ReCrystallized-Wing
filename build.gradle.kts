@@ -4,7 +4,8 @@ import org.jetbrains.gradle.ext.settings
 import org.jetbrains.gradle.ext.Gradle
 
 plugins {
-    id("com.gtnewhorizons.retrofuturagradle") version "1.4.1"
+    id("net.minecraftforge.gradle") version "[6.0,6.2)"
+    id("org.parchmentmc.librarian.forgegradle") version "1.+"
     id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.8"
     id("com.github.gmazzo.buildconfig") version "5.4.0"
     id("io.freefair.lombok") version "8.7.1"
@@ -14,12 +15,45 @@ group = "dev.redstudio"
 version = "2.0" // Versioning must follow the Ragnarök versioning convention: https://github.com/Red-Studio-Ragnarok/Commons/blob/main/Ragnar%C3%B6k%20Versioning%20Convention.md
 
 val id = "rcw"
-val minecraftVersion = "1.12.2"
+val minecraftVersion = "1.19.2"
 
 minecraft {
-    mcVersion = minecraftVersion
-    username = "Desoroxxx"
-    extraRunJvmArguments = listOf("-Dforge.logging.console.level=debug")
+    mappings("parchment", "2022.11.27-$minecraftVersion")
+
+    copyIdeResources.set(true)
+
+    runs {
+        create("client") {
+            workingDirectory(project.file("run"))
+            property("forge.logging.markers", "REGISTRIES")
+            property("forge.logging.console.level", "debug")
+            mods {
+                create(id) {
+                    source(sourceSets.main.get())
+                }
+            }
+        }
+        create("server") {
+            workingDirectory(project.file("run"))
+            property("forge.logging.markers", "REGISTRIES")
+            property("forge.logging.console.level", "debug")
+            mods {
+                create(id) {
+                    source(sourceSets.main.get())
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main {
+    resources {
+        srcDir("src/generated/resources")
+    }
+}
+
+dependencies {
+    minecraft("net.minecraftforge:forge:$minecraftVersion-43.4.2")
 }
 
 buildConfig {
@@ -37,7 +71,7 @@ buildConfig {
 // Set the toolchain version to decouple the Java we run Gradle with from the Java used to compile and run the mod
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(17))
         vendor.set(JvmVendorSpec.ADOPTIUM)
     }
     withSourcesJar() // Generate sources jar
@@ -57,32 +91,10 @@ tasks {
             if (!path.endsWith(".png"))
                 expand(expandProperties)
         }
-
-        finalizedBy("packageResourcePacks")
     }
 
-    // TODO: Maybe this could be it's own task that also expands like above?
-    //  this might fix the issue where it doesn't run on a clean build,
-    //  and it might also allow us to exclude the resource packs from the jar
-
-    register<Zip>("packageResourcePacks") {
-        group = "build"
-        description = "Packs resource packs into zip files and places them in the `build/libs` directory."
-        destinationDirectory.set(layout.buildDirectory.dir("libs"))
-
-        // Use the *processed resources*
-        val resourcePacksDir = layout.buildDirectory.dir("resources/main/resourcepacks").get().asFile
-        inputs.dir(resourcePacksDir)
-        resourcePacksDir.listFiles()?.filter { it.isDirectory }?.forEach { dir ->
-            from(dir)
-
-            // Transform the folder name, replace underscores and capitalize words
-            val resourcePackName = dir.name
-                .split("_")
-                .joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() } }
-
-            archiveFileName.set("${project.name} [$minecraftVersion] ${project.version} $resourcePackName.zip")
-        }
+    jar {
+        finalizedBy("reobfJar")
     }
 
     withType<Jar>().configureEach {
@@ -104,8 +116,8 @@ idea {
 
     project {
         settings {
-            jdkName = "1.8"
-            languageLevel = IdeaLanguageLevel("JDK_1_8")
+            jdkName = "17"
+            languageLevel = IdeaLanguageLevel("JDK_17")
 
             runConfigurations {
                 listOf("Client", "Server", "Obfuscated Client", "Obfuscated Server", "Vanilla Client", "Vanilla Server").forEach { name ->

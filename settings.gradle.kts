@@ -3,13 +3,13 @@ rootProject.name = "Re-Crystallized Wing"
 pluginManagement {
     repositories {
         maven {
-            // RetroFuturaGradle
-            name = "GTNH Maven"
-            url = uri("https://nexus.gtnewhorizons.com/repository/public/")
-            mavenContent {
-                includeGroupByRegex("com\\.gtnewhorizons\\..+")
-                includeGroup("com.gtnewhorizons")
-            }
+            // ForgeGradle
+            name = "Minecraft Forge Maven"
+            url = uri("https://maven.minecraftforge.net/")
+        }
+        maven {
+            name = "Parchment Maven"
+            url = uri("https://maven.parchmentmc.org/")
         }
         gradlePluginPortal()
         mavenCentral()
