@@ -7,12 +7,14 @@ import dev.redstudio.rcw.items.BurntWing;
 import dev.redstudio.rcw.items.CrystalWing;
 import dev.redstudio.rcw.items.EnderScepter;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -29,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static dev.redstudio.rcw.ProjectConstants.ID;
+import static dev.redstudio.rcw.ProjectConstants.LOGGER;
 
 //   /$$$$$$$             /$$$$$$                                  /$$               /$$ /$$ /$$                           /$$       /$$      /$$ /$$
 //  | $$__  $$           /$$__  $$                                | $$              | $$| $$|__/                          | $$      | $$  /$ | $$|__/
@@ -81,6 +84,7 @@ public final class RCW {
         ConfigTracker.INSTANCE.loadConfigs(ModConfig.Type.COMMON, FMLPaths.CONFIGDIR.get());
 
         MinecraftForge.EVENT_BUS.register(NostalgicSoundsHandler.class);
+        MinecraftForge.EVENT_BUS.register(RCW.class);
     }
 
     @SubscribeEvent
@@ -99,5 +103,20 @@ public final class RCW {
                 .add(entryBuilder);
 
         lootTableLoadEvent.getTable().addPool(poolBuilder.build());
+    }
+
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    private static class ModBusEventListener {
+
+        @SubscribeEvent
+        public static void onBuildContents(final BuildCreativeModeTabContentsEvent buildCreativeModeTabContentsEvent) {
+            if (buildCreativeModeTabContentsEvent.getTabKey() != CreativeModeTabs.TOOLS_AND_UTILITIES)
+                return;
+
+            buildCreativeModeTabContentsEvent.accept(CRYSTAL_WING_ITEM.get());
+            buildCreativeModeTabContentsEvent.accept(BURNING_WING.get());
+            buildCreativeModeTabContentsEvent.accept(BURNT_WING.get());
+            buildCreativeModeTabContentsEvent.accept(ENDER_SCEPTER.get());
+        }
     }
 }

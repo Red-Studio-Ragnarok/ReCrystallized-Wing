@@ -1,6 +1,7 @@
 package dev.redstudio.rcw.handlers;
 
 import lombok.NoArgsConstructor;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
@@ -32,7 +33,7 @@ import static lombok.AccessLevel.PRIVATE;
 public final class ResourcePacksHandler {
 
     /**
-     * Taken from <a href="https://github.com/Creators-of-Create/Create/blob/mc1.19/dev/src/main/java/com/simibubi/create/foundation/events/CommonEvents.java#L198">Create</a>
+     * Taken from <a href="https://github.com/Creators-of-Create/Create/blob/mc1.20.1/dev/src/main/java/com/simibubi/create/foundation/events/CommonEvents.java#L200">Create</a>
      */
     @SubscribeEvent
     public static void addPackFinders(final AddPackFindersEvent addPackFindersEvent) {
@@ -53,11 +54,11 @@ public final class ResourcePacksHandler {
     }
 
     private static void addResourcePack(final AddPackFindersEvent addPackFindersEvent, final IModFile modFile, final String resourcePackPath, final String resourcePackName) {
-        addPackFindersEvent.addRepositorySource((consumer, constructor) -> consumer.accept(Pack.create(new ResourceLocation(ID, resourcePackPath).toString(), false, () -> new ModFilePackResources(resourcePackName, modFile, "resourcepacks/" + resourcePackPath), constructor, Pack.Position.TOP, PackSource.DEFAULT)));
+        addPackFindersEvent.addRepositorySource(consumer -> consumer.accept(Pack.readMetaAndCreate(new ResourceLocation(ID, resourcePackPath).toString(), Component.literal(resourcePackName), false, id -> new ModFilePackResources(id, modFile, "resourcepacks/" + resourcePackPath), PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.DEFAULT)));
     }
 
     /**
-     * Taken from <a href="https://github.com/Creators-of-Create/Create/blob/mc1.19/dev/src/main/java/com/simibubi/create/foundation/ModFilePackResources.java">Create</a>
+     * Taken from <a href="https://github.com/Creators-of-Create/Create/blob/mc1.20.1/dev/src/main/java/com/simibubi/create/foundation/ModFilePackResources.java">Create</a>
      */
     private static final class ModFilePackResources extends PathPackResources {
 
@@ -65,7 +66,7 @@ public final class ResourcePacksHandler {
         private final String sourcePath;
 
         public ModFilePackResources(final String name, final IModFile modFile, final String sourcePath) {
-            super(name, modFile.findResource(sourcePath));
+            super(name, true, modFile.findResource(sourcePath));
 
             this.modFile = modFile;
             this.sourcePath = sourcePath;

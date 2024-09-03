@@ -30,7 +30,7 @@ public final class BurntWing extends BaseItem {
             return InteractionResultHolder.pass(itemStack);
 
         // If in the Nether, replace by a normal crystal wing and use it, which if in the nether will replace it by a burning crystal wing
-        if (player.getLevel().dimension() == NETHER)
+        if (player.level().dimension() == NETHER)
             return CRYSTAL_WING_ITEM.get().use(level, player, hand);
 
         RCWUtils.randomTeleport(level, player);

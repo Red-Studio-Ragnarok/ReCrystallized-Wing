@@ -15,10 +15,10 @@ group = "dev.redstudio"
 version = "2.0" // Versioning must follow the Ragnarök versioning convention: https://github.com/Red-Studio-Ragnarok/Commons/blob/main/Ragnar%C3%B6k%20Versioning%20Convention.md
 
 val id = "rcw"
-val minecraftVersion = "1.19.2"
+val minecraftVersion = "1.20.1"
 
 minecraft {
-    mappings("parchment", "2022.11.27-$minecraftVersion")
+    mappings("parchment", "2023.09.03-$minecraftVersion")
 
     copyIdeResources.set(true)
 
@@ -53,7 +53,7 @@ sourceSets.main {
 }
 
 dependencies {
-    minecraft("net.minecraftforge:forge:$minecraftVersion-43.4.2")
+    minecraft("net.minecraftforge:forge:$minecraftVersion-47.3.7")
 }
 
 buildConfig {

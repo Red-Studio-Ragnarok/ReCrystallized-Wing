@@ -34,7 +34,7 @@ public final class EnderScepter extends BaseItem {
         if (rayTraceResult == null || !rayTraceResult.getType().equals(HitResult.Type.BLOCK))
             return InteractionResultHolder.fail(itemStack);
 
-        final BlockPos.MutableBlockPos target = new BlockPos(rayTraceResult.getLocation()).mutable();
+        final BlockPos.MutableBlockPos target = BlockPos.containing(rayTraceResult.getLocation().x, rayTraceResult.getLocation().y, rayTraceResult.getLocation().z).mutable();
 
         if (player.getAbilities().flying)
             target.setY(Math.max((int) player.getY(), RCWUtils.getHighestSolidBlock(level, target, true)));

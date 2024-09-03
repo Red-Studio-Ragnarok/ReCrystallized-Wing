@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[41,43)"
+loaderVersion = "[47,48)"
 license = "MIT"
 issueTrackerURL = "https://github.com/Desoroxxx/Re-Crystallized-Wing"
 [[mods]]
@@ -27,6 +27,6 @@ https://www.buymeacoffee.com/desoroxxx/membership
 You can also buy me a hot chocolate
 https://www.buymeacoffee.com/desoroxxx.
 '''
-versionRange = "[1.19,1.19.2)"
+versionRange = "[1.20.1)"
 ordering = "NONE"
 side = "BOTH"

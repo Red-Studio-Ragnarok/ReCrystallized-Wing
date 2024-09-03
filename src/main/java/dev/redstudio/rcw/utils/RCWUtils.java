@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -47,7 +47,7 @@ public final class RCWUtils {
         final double yOffset = random.nextGaussian() / 12;
         final double zOffset = random.nextGaussian() / 12;
 
-        ((ServerLevel) entity.getLevel()).sendParticles(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(), entity.getZ(), amount, xOffset, yOffset, zOffset, velocity);
+        ((ServerLevel) entity.level()).sendParticles(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(), entity.getZ(), amount, xOffset, yOffset, zOffset, velocity);
     }
 
     /**
@@ -59,13 +59,13 @@ public final class RCWUtils {
      * @return True if the respawn location is safe, false otherwise
      */
     public static boolean verifyTeleportCoordinates(final Level level, final BlockPos blockPos) {
-        final Material floorBlockMaterial = level.getBlockState(blockPos.below()).getMaterial();
-        final Material bottomBlockMaterial = level.getBlockState(blockPos).getMaterial();
-        final Material topBlockMaterial = level.getBlockState(blockPos.above()).getMaterial();
+        final BlockState floorBlock = level.getBlockState(blockPos.below());
+        final BlockState bottomBlock = level.getBlockState(blockPos);
+        final BlockState topBlock = level.getBlockState(blockPos.above());
 
-        final boolean floorSafe = floorBlockMaterial.isSolid() || floorBlockMaterial.isLiquid();
-        final boolean bottomSafe = !bottomBlockMaterial.isSolid() && !bottomBlockMaterial.isLiquid();
-        final boolean topSafe = !topBlockMaterial.isSolid() && !topBlockMaterial.isLiquid();
+        final boolean floorSafe = floorBlock.isSolid() || !floorBlock.getFluidState().isEmpty();
+        final boolean bottomSafe = !bottomBlock.isSolid() && bottomBlock.getFluidState().isEmpty();
+        final boolean topSafe = !topBlock.isSolid() && topBlock.getFluidState().isEmpty();
 
         return floorSafe && bottomSafe && topSafe;
     }
@@ -186,7 +186,7 @@ public final class RCWUtils {
         if (RCWConfig.Server.NOSTALGIC_SOUNDS.get()) {
             NostalgicSoundsHandler.NOSTALGIC_SOUNDS.add(new NostalgicSound(player));
         } else {
-            player.getLevel().playSound(null, player.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1, 1);
+            player.level().playSound(null, player.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1, 1);
         }
     }
 }

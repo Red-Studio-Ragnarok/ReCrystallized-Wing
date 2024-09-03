@@ -1,6 +1,5 @@
 package dev.redstudio.rcw.items;
 
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
 /**
@@ -12,6 +11,6 @@ import net.minecraft.world.item.Item;
 public class BaseItem extends Item {
 
     public BaseItem(final Properties properties, final int durability) {
-        super(properties.tab(CreativeModeTab.TAB_TRANSPORTATION).durability(durability > 1 ? durability - 1 : durability == 1 ? 1 : 0));
+        super(properties.durability(durability > 1 ? durability - 1 : durability == 1 ? 1 : 0));
     }
 }
