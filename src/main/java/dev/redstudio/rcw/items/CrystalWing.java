@@ -41,7 +41,7 @@ public final class CrystalWing extends BaseItem {
         if (level.isClientSide())
             return InteractionResultHolder.pass(itemStack);
 
-        if (player.getLevel().dimension() == OVERWORLD) {
+        if (player.level().dimension() == OVERWORLD) {
             ServerPlayer serverPlayer = (ServerPlayer) player;
 
             BlockPos targetLocation = serverPlayer.getRespawnPosition();
@@ -51,7 +51,7 @@ public final class CrystalWing extends BaseItem {
                 respawnPosition = Player.findRespawnPositionAndUseSpawnBlock((ServerLevel) level, targetLocation, serverPlayer.getRespawnAngle(), false, false).orElse(null);
 
                 if (respawnPosition != null)
-                    targetLocation = new BlockPos(respawnPosition);
+                    targetLocation = BlockPos.containing(respawnPosition.x, respawnPosition.y, respawnPosition.z);
             }
 
             if (targetLocation == null || respawnPosition == null) {
@@ -68,7 +68,7 @@ public final class CrystalWing extends BaseItem {
             player.displayClientMessage(Component.translatable(ID + ".teleport.chatMessage"), RCWConfig.Client.SHOW_IN_ACTION_BAR.get());
 
             RCWUtils.teleportPlayer(level, player, targetLocation, 40);
-        } else if (player.getLevel().dimension() == NETHER) {
+        } else if (player.level().dimension() == NETHER) {
             level.playSound(null, player.blockPosition(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             itemStack = new ItemStack(BURNING_WING.get(), 1);
         } else {
