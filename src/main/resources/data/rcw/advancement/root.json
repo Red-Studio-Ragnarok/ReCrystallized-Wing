@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "${id}:crystal_wing"
+      "id": "${id}:crystal_wing"
     },
     "title": {
       "translate": "advancements.crystalWing.title"

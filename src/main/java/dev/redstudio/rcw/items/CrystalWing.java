@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 
 import static dev.redstudio.rcw.ProjectConstants.ID;
@@ -48,7 +49,8 @@ public final class CrystalWing extends BaseItem {
             Vec3 respawnPosition = null;
 
             if (targetLocation != null) {
-                respawnPosition = Player.findRespawnPositionAndUseSpawnBlock((ServerLevel) level, targetLocation, serverPlayer.getRespawnAngle(), false, false).orElse(null);
+                final DimensionTransition dimensionTransition = serverPlayer.findRespawnPositionAndUseSpawnBlock(false, DimensionTransition.DO_NOTHING);
+                respawnPosition = dimensionTransition.missingRespawnBlock() ? null : dimensionTransition.pos();
 
                 if (respawnPosition != null)
                     targetLocation = BlockPos.containing(respawnPosition.x, respawnPosition.y, respawnPosition.z);
@@ -76,9 +78,9 @@ public final class CrystalWing extends BaseItem {
         }
 
         if (RCWConfig.Common.CRYSTAL_WING_DURABILITY.get() == 1) {
-            itemStack.hurtAndBreak(2, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
+            itemStack.hurtAndBreak(2, player, hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
         } else if (RCWConfig.Common.CRYSTAL_WING_DURABILITY.get() > 0) {
-            itemStack.hurtAndBreak(1, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
+            itemStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
         }
 
         player.getCooldowns().addCooldown(this, RCWConfig.Server.CRYSTAL_WING_COOLDOWN.get());

@@ -36,7 +36,7 @@ public final class BurningWing extends BaseItem {
 
             player.getInventory().setItem(itemSlot, new ItemStack(BURNT_WING.get()));
         } else if (!entity.isOnFire()) {
-            entity.setSecondsOnFire(2);
+            entity.igniteForSeconds(2);
         }
     }
 }

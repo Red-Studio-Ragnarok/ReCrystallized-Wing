@@ -57,6 +57,6 @@ public final class NostalgicSound {
      * @param pitch An integer value representing the pitch of the "pling" sound to be played, measured in semitones relative to the standard A440 tuning
      */
     private void playPlingAtPitch(final float pitch) {
-        level.playSound(null, player.blockPosition(), SoundEvents.NOTE_BLOCK_PLING.get(), SoundSource.MASTER, 0.5F, pitch);
+        level.playSound(null, player.blockPosition(), SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.MASTER, 0.5F, pitch);
     }
 }

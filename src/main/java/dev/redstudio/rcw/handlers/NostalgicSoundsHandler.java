@@ -2,8 +2,8 @@ package dev.redstudio.rcw.handlers;
 
 import dev.redstudio.rcw.sounds.NostalgicSound;
 import lombok.NoArgsConstructor;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,8 @@ public final class NostalgicSoundsHandler {
     public static final List<NostalgicSound> NOSTALGIC_SOUNDS = new ArrayList<>();
 
     @SubscribeEvent
-    public static void onTick(final TickEvent.LevelTickEvent levelTickEvent) {
-        if (levelTickEvent.side.isClient() || levelTickEvent.phase == TickEvent.Phase.START)
+    public static void onTick(final LevelTickEvent.Pre levelTickEvent) {
+        if (levelTickEvent.getLevel().isClientSide)
             return;
 
         NOSTALGIC_SOUNDS.removeIf(NostalgicSound::play);

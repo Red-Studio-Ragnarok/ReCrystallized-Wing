@@ -6,7 +6,7 @@
 
 [![Java 17](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/built-with/java17_vector.svg)](https://adoptium.net/temurin/releases/?version=17)
 [![Gradle](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/built-with/gradle_vector.svg)](https://gradle.org/)
-[![Forge 1.20.1](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.20.1.html)
+[![NeoForge](https://raw.githubusercontent.com/thomasglasser/thomasglasser/main/files/badges/cozy/supported/neoforge_vector.svg)](https://projects.neoforged.net/neoforged/neoforge)
 
 ![Banner](https://www.bisecthosting.com/images/CF/ReCrystallized_Wing/BH_RCW_header.webp)
 
