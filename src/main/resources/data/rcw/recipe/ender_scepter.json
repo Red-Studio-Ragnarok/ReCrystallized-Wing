@@ -1,8 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ggg",
-    "eff"
+    " e ",
+    "gsg",
+    "gsg"
   ],
   "key": {
     "g": {
@@ -11,12 +12,12 @@
     "e": {
       "item": "minecraft:ender_pearl"
     },
-    "f": {
-      "item": "minecraft:feather"
+    "s": {
+      "item": "minecraft:end_stone"
     }
   },
   "result": {
-    "item": "${id}:crystal_wing",
+    "id": "${id}:ender_scepter",
     "count": 1
   }
 }

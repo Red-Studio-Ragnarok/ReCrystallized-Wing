@@ -42,9 +42,9 @@ public final class EnderScepter extends BaseItem {
         RCWUtils.teleportPlayer(level, player, target, 40);
 
         if (RCWConfig.Common.ENDER_SCEPTER_DURABILITY.get() == 1)
-            itemStack.hurtAndBreak(2, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
+            itemStack.hurtAndBreak(2, player, hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
         else if (RCWConfig.Common.ENDER_SCEPTER_DURABILITY.get() > 0)
-            itemStack.hurtAndBreak(1, player, player1 -> player1.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
+            itemStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND  ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
         player.getCooldowns().addCooldown(this, RCWConfig.Server.ENDER_SCEPTER_COOLDOWN.get());
 

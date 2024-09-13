@@ -1,12 +1,12 @@
 modLoader = "javafml"
-loaderVersion = "[47,48)"
+loaderVersion = "[1,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/Desoroxxx/Re-Crystallized-Wing"
 [[mods]]
 modId = "${id}"
 version = "${version}"
 displayName = "${name}"
-updateJSONURL = "https://forge.curseupdate.com/839163/${id}"
+updateJSONURL = "https://neoforge.curseupdate.com/839163/${id}"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/rcw"
 logoFile = "logo.png"
 credits = "Desoroxxx, sir_squidly, bspkrs, DaftPVF"
@@ -27,6 +27,11 @@ https://www.buymeacoffee.com/desoroxxx/membership
 You can also buy me a hot chocolate
 https://www.buymeacoffee.com/desoroxxx.
 '''
-versionRange = "[1.20.1)"
-ordering = "NONE"
-side = "BOTH"
+
+[[dependencies.${id}]]
+modId="neoforge"
+versionRange="[21,)"
+
+[[dependencies.${id}]]
+modId="minecraft"
+versionRange="[1.21,)"

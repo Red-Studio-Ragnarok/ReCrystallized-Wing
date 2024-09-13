@@ -4,8 +4,7 @@ import org.jetbrains.gradle.ext.settings
 import org.jetbrains.gradle.ext.Gradle
 
 plugins {
-    id("net.minecraftforge.gradle") version "[6.0,6.2)"
-    id("org.parchmentmc.librarian.forgegradle") version "1.+"
+    id("net.neoforged.moddev") version "2.0.29-beta"
     id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.8"
     id("com.github.gmazzo.buildconfig") version "5.4.0"
     id("io.freefair.lombok") version "8.7.1"
@@ -15,45 +14,32 @@ group = "dev.redstudio"
 version = "2.0" // Versioning must follow the Ragnarök versioning convention: https://github.com/Red-Studio-Ragnarok/Commons/blob/main/Ragnar%C3%B6k%20Versioning%20Convention.md
 
 val id = "rcw"
-val minecraftVersion = "1.20.1"
+val minecraftVersion = "1.21.1"
 
-minecraft {
-    mappings("parchment", "2023.09.03-$minecraftVersion")
+neoForge {
+    version = "21.1.51"
 
-    copyIdeResources.set(true)
+    parchment {
+        minecraftVersion = "1.21"
+        mappingsVersion = "2024.07.28"
+    }
 
     runs {
-        create("client") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            mods {
-                create(id) {
-                    source(sourceSets.main.get())
-                }
-            }
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
         }
-        create("server") {
-            workingDirectory(project.file("run"))
-            property("forge.logging.markers", "REGISTRIES")
-            property("forge.logging.console.level", "debug")
-            mods {
-                create(id) {
-                    source(sourceSets.main.get())
-                }
-            }
-        }
+
+        create("client").client()
+        create("server").server()
     }
+
+    mods.create(id).sourceSet(sourceSets.main.get())
 }
 
 sourceSets.main {
     resources {
         srcDir("src/generated/resources")
     }
-}
-
-dependencies {
-    minecraft("net.minecraftforge:forge:$minecraftVersion-47.3.7")
 }
 
 buildConfig {
@@ -71,7 +57,7 @@ buildConfig {
 // Set the toolchain version to decouple the Java we run Gradle with from the Java used to compile and run the mod
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
         vendor.set(JvmVendorSpec.ADOPTIUM)
     }
     withSourcesJar() // Generate sources jar
@@ -93,10 +79,6 @@ tasks {
         }
     }
 
-    jar {
-        finalizedBy("reobfJar")
-    }
-
     withType<Jar>().configureEach {
         archiveBaseName.set(archiveBaseName.get().replace(" ", "-") + "-[$minecraftVersion]")
     }
@@ -116,8 +98,8 @@ idea {
 
     project {
         settings {
-            jdkName = "17"
-            languageLevel = IdeaLanguageLevel("JDK_17")
+            jdkName = "21"
+            languageLevel = IdeaLanguageLevel("JDK_21")
 
             runConfigurations {
                 listOf("Client", "Server", "Obfuscated Client", "Obfuscated Server", "Vanilla Client", "Vanilla Server").forEach { name ->

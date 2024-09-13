@@ -2,13 +2,13 @@
   "parent": "${id}:root",
   "display": {
     "icon": {
-      "item": "${id}:ender_scepter"
+      "id": "${id}:burnt_wing"
     },
     "title": {
-      "translate": "advancements.enderScepter.title"
+      "translate": "advancements.burntWing.title"
     },
     "description": {
-      "translate": "advancements.enderScepter.description"
+      "translate": "advancements.burntWing.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -22,14 +22,11 @@
         "items": [
           {
             "items": [
-              "${id}:ender_scepter"
+              "${id}:burnt_wing"
             ]
           }
         ]
       }
     }
-  },
-  "rewards": {
-    "experience": 128
   }
 }

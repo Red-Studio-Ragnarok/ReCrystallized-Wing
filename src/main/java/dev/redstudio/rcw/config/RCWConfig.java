@@ -1,7 +1,7 @@
 package dev.redstudio.rcw.config;
 
 import lombok.NoArgsConstructor;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -14,14 +14,14 @@ public class RCWConfig {
     @NoArgsConstructor(access = PRIVATE)
     public class Client {
 
-        public static final ForgeConfigSpec SPEC;
+        public static final ModConfigSpec SPEC;
 
-        private static final ForgeConfigSpec.Builder BUILDER;
+        private static final ModConfigSpec.Builder BUILDER;
 
-        public static final ForgeConfigSpec.BooleanValue SHOW_IN_ACTION_BAR;
+        public static final ModConfigSpec.BooleanValue SHOW_IN_ACTION_BAR;
 
         static {
-            BUILDER = new ForgeConfigSpec.Builder();
+            BUILDER = new ModConfigSpec.Builder();
 
             SHOW_IN_ACTION_BAR = BUILDER
                     .comment("If true show the message when you use the Crystal Wing in the action bar instead of the chat")
@@ -34,17 +34,17 @@ public class RCWConfig {
     @NoArgsConstructor(access = PRIVATE)
     public class Common {
 
-        public static final ForgeConfigSpec SPEC;
+        public static final ModConfigSpec SPEC;
 
-        private static final ForgeConfigSpec.Builder BUILDER;
+        private static final ModConfigSpec.Builder BUILDER;
 
         // Durability
-        public static final ForgeConfigSpec.IntValue CRYSTAL_WING_DURABILITY;
-        public static final ForgeConfigSpec.IntValue BURNT_WING_DURABILITY;
-        public static final ForgeConfigSpec.IntValue ENDER_SCEPTER_DURABILITY;
+        public static final ModConfigSpec.IntValue CRYSTAL_WING_DURABILITY;
+        public static final ModConfigSpec.IntValue BURNT_WING_DURABILITY;
+        public static final ModConfigSpec.IntValue ENDER_SCEPTER_DURABILITY;
 
         static {
-            BUILDER = new ForgeConfigSpec.Builder();
+            BUILDER = new ModConfigSpec.Builder();
 
             BUILDER.push("Durability").comment("Configuration for the durability of items");
 
@@ -69,23 +69,23 @@ public class RCWConfig {
     @NoArgsConstructor(access = PRIVATE)
     public class Server {
 
-        public static final ForgeConfigSpec SPEC;
+        public static final ModConfigSpec SPEC;
 
-        private static final ForgeConfigSpec.Builder BUILDER;
+        private static final ModConfigSpec.Builder BUILDER;
 
         // General
-        public static final ForgeConfigSpec.BooleanValue NOSTALGIC_SOUNDS;
-        public static final ForgeConfigSpec.IntValue ENDER_SCEPTER_REACH;
-        public static final ForgeConfigSpec.IntValue ENDER_SCEPTER_CREATIVE_REACH_MULT;
-        public static final ForgeConfigSpec.IntValue RANDOM_TELEPORTATION_DISTANCE;
+        public static final ModConfigSpec.BooleanValue NOSTALGIC_SOUNDS;
+        public static final ModConfigSpec.IntValue ENDER_SCEPTER_REACH;
+        public static final ModConfigSpec.IntValue ENDER_SCEPTER_CREATIVE_REACH_MULT;
+        public static final ModConfigSpec.IntValue RANDOM_TELEPORTATION_DISTANCE;
 
         // Cooldown
-        public static final ForgeConfigSpec.IntValue CRYSTAL_WING_COOLDOWN;
-        public static final ForgeConfigSpec.IntValue BURNT_WING_COOLDOWN;
-        public static final ForgeConfigSpec.IntValue ENDER_SCEPTER_COOLDOWN;
+        public static final ModConfigSpec.IntValue CRYSTAL_WING_COOLDOWN;
+        public static final ModConfigSpec.IntValue BURNT_WING_COOLDOWN;
+        public static final ModConfigSpec.IntValue ENDER_SCEPTER_COOLDOWN;
 
         static {
-            BUILDER = new ForgeConfigSpec.Builder();
+            BUILDER = new ModConfigSpec.Builder();
 
             NOSTALGIC_SOUNDS = BUILDER
                     .comment("If true uses the sounds from the original Crystal Wing 1.2.5")

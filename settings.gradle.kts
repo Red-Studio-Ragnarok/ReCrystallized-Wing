@@ -3,9 +3,12 @@ rootProject.name = "Re-Crystallized Wing"
 pluginManagement {
     repositories {
         maven {
-            // ForgeGradle
-            name = "Minecraft Forge Maven"
-            url = uri("https://maven.minecraftforge.net/")
+            // ModDevGradle
+            name = "NeoForged Maven"
+            url = uri("https://maven.neoforged.net/releases/")
+            content {
+                includeGroup("net.neoforged")
+            }
         }
         maven {
             name = "Parchment Maven"
